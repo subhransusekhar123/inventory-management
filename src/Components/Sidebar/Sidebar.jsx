@@ -13,6 +13,7 @@ import MonetizationOnRoundedIcon from '@mui/icons-material/MonetizationOnRounded
 import SettingsIcon from '@mui/icons-material/Settings';
 import CategorySharpIcon from '@mui/icons-material/CategorySharp';
 import ProductionQuantityLimitsSharpIcon from '@mui/icons-material/ProductionQuantityLimitsSharp';
+import { Link } from "react-router-dom";
 
 
 const Sidebar = ({children}) => {
@@ -38,16 +39,18 @@ const Sidebar = ({children}) => {
 
       <List>
 
-      <ListItem disablePadding>
+        {/* <Link to="/product"> */}
+      <ListItem disablePadding component={Link} to="/product" >
             <ListItemButton>
               <ListItemIcon>
                 <CategorySharpIcon/>
               </ListItemIcon>
-              <ListItemText primary="products" />
+              <ListItemText primary="products" style={{ color:"black" }}/>
             </ListItemButton>
           </ListItem>
+        {/* </Link> */}
        
-          <ListItem disablePadding>
+          <ListItem disablePadding component={Link} to="/">
           <ListItemButton>
               <ListItemIcon>
                 <MonetizationOnRoundedIcon/>
@@ -56,21 +59,21 @@ const Sidebar = ({children}) => {
         </ListItemButton>
           </ListItem>
 
-          <ListItem disablePadding>
+          <ListItem disablePadding component={Link} to="/order">
             <ListItemButton>
               <ListItemIcon>
                 <ShoppingCartRoundedIcon/>
               </ListItemIcon>
-              <ListItemText primary="your orders" />
+              <ListItemText primary="your orders" style={{ color:"black" }}/>
             </ListItemButton>
           </ListItem>
 
-          <ListItem disablePadding>
+          <ListItem disablePadding component={Link} to="/inventory">
             <ListItemButton>
               <ListItemIcon>
                 <ProductionQuantityLimitsSharpIcon/>
               </ListItemIcon>
-              <ListItemText primary="manage inventory" />
+              <ListItemText primary="manage inventory" style={{ color:'black' }}/>
             </ListItemButton>
           </ListItem>
 

@@ -15,6 +15,8 @@ import Signup from './Components/signUp/Signup';
 import Login from './Components/logIn/Login';
 import Test from './Components/Test/Test';
 import Navbar from './Components/Navbar/Navbar';
+import Inventory from './Components/inventory/Inventory';
+import Profile from './Components/profile/Profile';
 
 function App() {
   
@@ -28,7 +30,9 @@ function App() {
             <Route path="/product" element={ <Product/> }/>
             <Route path="/order" element={ <OrderPage/> }/>
             <Route path="/customer" element={ <Customer/> }/>       
-            <Route path="/customer" element={ <User/> }/>            
+            <Route path="/customer" element={ <User/> }/>  
+            <Route path="/inventory" element={ <Inventory/> }/>  
+            <Route path="/profile" element={ <Profile/> }/>                       
           </Route>
           <Route path="/" element={ <Signup/> }/>
           <Route path="/signin" element={ <Login/> }/>
