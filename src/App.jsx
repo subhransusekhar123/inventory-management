@@ -13,6 +13,8 @@ import Customer from './Components/customer/Customer';
 import User from './Components/user/User';
 import Signup from './Components/signUp/Signup';
 import Login from './Components/logIn/Login';
+import Test from './Components/Test/Test';
+import Navbar from './Components/Navbar/Navbar';
 
 function App() {
   
@@ -20,6 +22,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Navbar/>
         <Routes>
           <Route element={ <Private/> }>
             <Route path="/product" element={ <Product/> }/>
@@ -29,6 +32,8 @@ function App() {
           </Route>
           <Route path="/" element={ <Signup/> }/>
           <Route path="/signin" element={ <Login/> }/>
+          <Route path="/test" element={ <Test/> }/>
+
         </Routes>
       </Router>
 
