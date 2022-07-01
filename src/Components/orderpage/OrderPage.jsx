@@ -9,6 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import ManualModal from '../ManualModal/ManualModal';
+
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -52,8 +54,10 @@ const OrderPage = () => {
                 <TableCell align="right">{row.carbs}</TableCell>
                 <TableCell align="right">{row.protein}</TableCell>
                 <TableCell align="right">
-                  <IconButton>
+                  <IconButton >
+                    <ManualModal>
                       <ModeEditOutlineRoundedIcon color='primary'/>
+                    </ManualModal>
                   </IconButton>
                   <IconButton>
                     <DeleteRoundedIcon color='warning'/>
