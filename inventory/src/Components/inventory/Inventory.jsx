@@ -1,10 +1,10 @@
-import * as React from "react";
+import  React,{useState} from "react";
 import Grid from "@mui/material/Grid";
 // import AddModal from "./AddModal";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import AddIcon from '@mui/icons-material/Add';
+// import AddIcon from '@mui/icons-material/Add';
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 // import AddStockEdit from "./AddStockEdit";
@@ -15,7 +15,23 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Stack from '@mui/material/Stack';
 
+
+
+  
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -60,20 +76,101 @@ const rows = [
 
 
 export default function CustomizedTables() {
+  const [age, setAge] = React.useState('');
+  const [rate, setRate] = React.useState('');
+  const [company,setCompany] = React.useState('');
+
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+  const ratechange = (event) => {
+    setRate(event.target.value);
+  }; 
+   const companychange = (event) => {
+    setCompany(event.target.value);
+  };
   return (
     <div>
-       {/* <Button variant="contained" component="span">
-          Upload
-        </Button> 
-      <AddModal />   */}
+  
+      <Grid container spacing={0}>
+      <Grid item xs={6}> 
+      <h1>Inventory</h1>
+      </Grid>
+      {/* <Grid item xs={4}> */}
+      <Stack spacing={1} direction="row">
+      <Button >Action</Button>
+      </Stack>
+      {/* </Grid> */}
+      {/* <Grid item xs={4}> */}
+      <Stack spacing={2} direction="row">
+      <Button>upload items</Button>
+      </Stack>
+      {/* </Grid> */}
+    </Grid>
+    <br />
       <TableContainer component={Paper}>
       <Grid container spacing={2}>
-        <Grid item xs={6} md={10} sx={{ margin: "0 auto", marginTop: "30px",marginBottom: "20px" }}>
-      <TextField label="Date" color="secondary" focused />
-      <TextField label="Company " color="secondary" focused />
-      <TextField label="Status " color="secondary" focused />
+        {/* <Grid item xs={6} md={12} sx={{ margin: "0 auto", marginTop: "30px",marginBottom: "20px" }}> */}
+        <Grid item xs={4} sx={{ marginTop: "5px",}}>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <InputLabel id="demo-select-small">Data</InputLabel>
+      <Select
+        labelId="demo-select-small"
+        id="demo-select-small"
+        value={age}
+        label="data"
+        onChange={handleChange}
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem value={10}>product</MenuItem>
+        <MenuItem value={20}>company</MenuItem>
+        <MenuItem value={30}>rate</MenuItem>
+      </Select>
+    </FormControl>
         </Grid>
+        <Grid item xs={4} sx={{ marginTop: "5px",}}>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <InputLabel id="demo-select-small">category</InputLabel>
+      <Select
+        labelId="demo-select-small"
+        id="demo-select-small"
+        value={company}
+        label="category"
+        onChange={companychange}
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem value={10}>product</MenuItem>
+        <MenuItem value={20}>company</MenuItem>
+        <MenuItem value={30}>rate</MenuItem>
+      </Select>
+    </FormControl>       
+     </Grid>
+        <Grid item xs={4} sx={{ marginTop: "5px",}}>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <InputLabel id="demo-select-small">status</InputLabel>
+      <Select
+        labelId="demo-select-small"
+        id="demo-select-small"
+        value={rate}
+        label="status"
+        onChange={ratechange}
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem value={10}>product</MenuItem>
+        <MenuItem value={20}>company</MenuItem>
+        <MenuItem value={30}>rate</MenuItem>
+      </Select>
+    </FormControl>        
+    </Grid>
         </Grid>
+        {/* </Grid> */}
         <Grid container spacing={2}>
         <Grid item xs={6} md={8} sx={{ margin: "0 auto", marginTop: "10px",marginBottom: "50px" }}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
