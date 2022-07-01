@@ -21,7 +21,7 @@ const Signup = () => {
   const classes = useStyle()
   const paperStyle={padding:'30x 20px', width:400, margin:"20px auto"}
   const headerStyle={margin:0}
-  const avatarStyle={backgroundColor:'green'}
+  const avatarStyle={backgroundColor:'blue'}
   return (
   <Grid className={classes.sonil}>
     <Paper elevation={20} style={paperStyle} >

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Avatar, Button, Grid, Paper, TextField, Typography } from '@mui/material';
-import Checkbox from '@material-ui/core/Checkbox';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
@@ -25,7 +24,7 @@ const Login = () => {
   const classes = useStyle()
   const paperStyle={padding:'30x 20px', width:400, margin:"20px auto"}
   const headerStyle={margin:0}
-  const avatarStyle={backgroundColor:'green'}
+  const avatarStyle={backgroundColor:'blue'}
   return (
   <Grid className={classes.sonil}>
     <Paper elevation={20} style={paperStyle} >
