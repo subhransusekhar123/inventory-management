@@ -1,0 +1,51 @@
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+
+const useStyle = makeStyles({
+    button_style:{
+        flex:1
+    }
+})
+
+const ProductCard = () => {
+    const [quantityButton,setQuantityButton] = React.useState(0)
+    
+    const classes = useStyle()
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image="/static/images/cards/contemplative-reptile.jpg"
+          alt="green iguana"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Lizard
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <span size="small" color="primary" className={classes.button_style}>
+          <Button onClick={()=>{ quantityButton > 0 ? setQuantityButton(quantityButton-1) : 0}}><RemoveIcon/></Button>
+          <span>{ quantityButton }</span>
+          <Button onClick={()=>{ setQuantityButton(quantityButton+1) }}><AddIcon/></Button>
+        </span>
+
+        <Button size="small" color="primary" className={classes.button_style}>
+          add
+        </Button>
+      </CardActions>
+    </Card>
+  );
+}
+
+export default ProductCard

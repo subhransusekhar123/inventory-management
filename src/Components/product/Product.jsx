@@ -1,8 +1,16 @@
-import React from 'react'
+import { Container } from '@mui/material';
+import React from 'react';
+import ProductCard from './ProductCard';
+
 
 const Product = () => {
   return (
-    <div>Product</div>
+ 
+      <Container>
+      <ProductCard/>
+
+      </Container>
+
   )
 }
 
