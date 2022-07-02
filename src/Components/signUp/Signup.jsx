@@ -19,9 +19,30 @@ const useStyle = makeStyles({
 })
 const Signup = () => {
   const classes = useStyle()
+  //style
   const paperStyle={padding:'30x 20px', width:400, margin:"20px auto"}
   const headerStyle={margin:0}
   const avatarStyle={backgroundColor:'blue'}
+  //style
+
+  const [signupData,setSignupData] = React.useState({
+    firstname:"",
+    lastname:"",
+    email:'',
+    password:"",
+    companyname:""
+  })
+
+  const changeHandler = (e) => {
+    setSignupData({
+      ...signupData,[e.target.name]:e.target.value
+    })
+  }
+
+  const clickHandler = (e) => {
+    e.preventDefault()
+    console.warn(signupData)
+  }
   return (
   <Grid className={classes.sonil}>
     <Paper elevation={20} style={paperStyle} >
@@ -33,16 +54,16 @@ const Signup = () => {
       <h2 style={headerStyle}>Sign Up</h2>
       <Typography variant='caption'>please fill this form t create account</Typography>
     <form style={{margin:"5px"}}>
-      <TextField fullWidth label='First Name' style={{ marginTop:"5px",marginBottom:"5px"}}></TextField>
-      <TextField fullWidth label='Last Name' style={{ marginTop:"5px",marginBottom:"5px"}}></TextField>
-      <TextField fullWidth label='Email' style={{ marginTop:"5px",marginBottom:"5px"}}></TextField>
-      <TextField fullWidth label='Password' style={{ marginTop:"5px",marginBottom:"5px"}}></TextField>
-      <TextField fullWidth label='Company Name' style={{ marginTop:"5px",marginBottom:"5px"}}></TextField>
+      <TextField fullWidth label='First Name' style={{ marginTop:"5px",marginBottom:"5px"}} name="firstname" onChange={changeHandler}></TextField>
+      <TextField fullWidth label='Last Name' style={{ marginTop:"5px",marginBottom:"5px"}} name="lastname" onChange={changeHandler}></TextField>
+      <TextField fullWidth label='Email' style={{ marginTop:"5px",marginBottom:"5px"}} name="email" onChange={changeHandler}></TextField>
+      <TextField fullWidth label='Password' style={{ marginTop:"5px",marginBottom:"5px"}} name="password" type="password" onChange={changeHandler}></TextField>
+      <TextField fullWidth label='Company Name' style={{ marginTop:"5px",marginBottom:"5px"}} name="companyname" onChange={changeHandler}></TextField>
      
     
 <br></br>
 
-<Button type='signup' variant='contained' color='primary'>SignUp</Button>
+<Button type='signup' variant='contained' color='primary' onClick={clickHandler}>SignUp</Button>
     </form>
     </Paper>
   </Grid>

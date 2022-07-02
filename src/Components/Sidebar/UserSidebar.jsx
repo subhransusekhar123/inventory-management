@@ -16,7 +16,7 @@ import ProductionQuantityLimitsSharpIcon from '@mui/icons-material/ProductionQua
 import { Link } from "react-router-dom";
 
 
-const Sidebar = ({children}) => {
+const UserSidebar = ({children}) => {
   const [state, setState] = React.useState({
     left: false,
   });
@@ -39,7 +39,16 @@ const Sidebar = ({children}) => {
 
       <List>
 
-        
+        {/* <Link to="/product"> */}
+      <ListItem disablePadding component={Link} to="/product" >
+            <ListItemButton>
+              <ListItemIcon>
+                <CategorySharpIcon/>
+              </ListItemIcon>
+              <ListItemText primary="products" style={{ color:"black" }}/>
+            </ListItemButton>
+          </ListItem>
+        {/* </Link> */}
        
           <ListItem disablePadding component={Link} to="/">
           <ListItemButton>
@@ -50,13 +59,12 @@ const Sidebar = ({children}) => {
         </ListItemButton>
           </ListItem>
 
-
-          <ListItem disablePadding component={Link} to="/inventory">
+          <ListItem disablePadding component={Link} to="/order">
             <ListItemButton>
               <ListItemIcon>
-                <ProductionQuantityLimitsSharpIcon/>
+                <ShoppingCartRoundedIcon/>
               </ListItemIcon>
-              <ListItemText primary="manage inventory" style={{ color:'black' }}/>
+              <ListItemText primary="your orders" style={{ color:"black" }}/>
             </ListItemButton>
           </ListItem>
 
@@ -90,4 +98,4 @@ const Sidebar = ({children}) => {
     </div>
   );
 }
-export default Sidebar;
+export default UserSidebar;

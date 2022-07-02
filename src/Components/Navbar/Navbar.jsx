@@ -5,16 +5,25 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from '../Sidebar/Sidebar';
 import { Link } from "react-router-dom";
 import Profile from '../profile/Profile';
+import UserSidebar from '../Sidebar/UserSidebar';
 
 
 const Navbar = () => {
+    let isAdmin = true ;
   return (
     <Container>
         <Toolbar style={{marginBottom:"40px"}}>
             <IconButton color="inherit">
-                <Sidebar>
+                {
+                    isAdmin ?  
+                    <Sidebar>
                     <MenuIcon />
-                </Sidebar>
+                </Sidebar> :
+                <UserSidebar>
+                    <MenuIcon/>
+                </UserSidebar>
+                }
+               
             </IconButton>
             <Typography variant='h6' style={{flexGrow:1}}></Typography>
             <Button>Logout</Button>
@@ -24,9 +33,6 @@ const Navbar = () => {
         </Toolbar>
     </Container>
      
-        
-   
-    
   )
 }
 
