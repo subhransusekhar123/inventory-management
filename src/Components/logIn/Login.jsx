@@ -46,15 +46,20 @@ const Login = () => {
   const clickHandler = (e) => {
     e.preventDefault()
     console.warn(loginData)
-    axios.post("http://localhost:8900/auth/login",loginData)
-    .then((data)=>{
-      setDataGot(data.data)
-      localStorage.setItem("setData",JSON.stringify(data.data))
-      alert("success")
-    })
-    .catch((err)=>{
-      alert( "invalid data" )
-    })
+    if(loginData.email && loginData.password){
+      axios.post("http://localhost:8900/auth/login",loginData)
+      .then((data)=>{
+        setDataGot(data.data)
+        localStorage.setItem("setData",JSON.stringify(data.data))
+        alert("success")
+      })
+      .catch((err)=>{
+        alert( "invalid data" )
+      })
+    }else{
+      alert("fill all the fields")
+    }
+
   }
   return (
   <Grid className={classes.sonil}>

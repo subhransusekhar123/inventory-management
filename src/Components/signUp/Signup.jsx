@@ -46,14 +46,19 @@ const Signup = () => {
   const clickHandler = (e) => {
     e.preventDefault()
     console.warn(signupData)
-    axios.post("http://localhost:8900/auth/signup",signupData)
-    .then((data)=>{
-      alert("data saved")
-      navigate("/signin")
-    })
-    .catch((err)=>{
-      alert("error")
-    })
+    if(signupData.firstname && signupData.lastname && signupData.email && signupData.password && signupData.companyname){
+      axios.post("http://localhost:8900/auth/signup",signupData)
+      .then((data)=>{
+        alert("data saved")
+        navigate("/signin")
+      })
+      .catch((err)=>{
+        alert("error")
+      })
+
+    }else{
+      alert("fill all the input fields")
+    }
   }
   return (
   <Grid className={classes.sonil}>
