@@ -34,15 +34,15 @@ const Inventory = () => {
     <Container>
       <Stack direction="row" style={{display:"flex",justifyContent:"space-evenly",marginBottom:'20px'}}>
 
-        <TextField id="outlined-basic" label="product name" variant="outlined" name='name' onChange={changeHandler} />
-        <TextField id="outlined-basic" label="quantity" variant="outlined" type="Number" name="quantity" onChange={changeHandler}/>
-         <TextField id="outlined-basic" label="price" variant="outlined" type="Number" name="price" onChange={changeHandler}/>
-      <label htmlFor="contained-button-file" >
-         <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={imageHandler}/>
+        <TextField id="outlined-basic" label="product name" variant="outlined" name='name' onChange={ changeHandler } />
+        <TextField id="outlined-basic" label="quantity" variant="outlined" type="Number" name="quantity" onChange={ changeHandler } />
+        <TextField id="outlined-basic" label="price" variant="outlined" type="Number" name="price" onChange={ changeHandler } />
+         <label htmlFor="contained-button-file" >
+         <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={ imageHandler }/>
          <Button variant="contained" component="span" >
            Upload
          </Button>
-      </label>
+        </label>
       <Button variant='contained' onClick={clickHandler}>add</Button>
       </Stack>
 

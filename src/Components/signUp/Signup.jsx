@@ -1,9 +1,11 @@
 import React from 'react';
-import { Avatar, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Avatar, Button, Grid, IconButton, Paper, TextField, Typography } from '@mui/material';
 import Checkbox from '@material-ui/core/Checkbox';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 // import {FormControlLabel} from '@material-ui/core/FormControlLabel';
 const useStyle = makeStyles({
   sonil:{
@@ -18,6 +20,7 @@ const useStyle = makeStyles({
   }
 })
 const Signup = () => {
+  const navigate = useNavigate()
   const classes = useStyle()
   //style
   const paperStyle={padding:'30x 20px', width:400, margin:"20px auto"}
@@ -42,6 +45,7 @@ const Signup = () => {
   const clickHandler = (e) => {
     e.preventDefault()
     console.warn(signupData)
+    navigate("/signin")
   }
   return (
   <Grid className={classes.sonil}>
@@ -64,7 +68,15 @@ const Signup = () => {
 <br></br>
 
 <Button type='signup' variant='contained' color='primary' onClick={clickHandler}>SignUp</Button>
+
+
     </form>
+ <Typography variant='h6'>
+    <IconButton color='primary' onClick={()=>{navigate("/signin")}}>
+
+    already have an account
+    </IconButton>
+  </Typography>
     </Paper>
   </Grid>
   )
