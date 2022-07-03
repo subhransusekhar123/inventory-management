@@ -16,6 +16,7 @@ import ProductionQuantityLimitsSharpIcon from '@mui/icons-material/ProductionQua
 import { Link } from "react-router-dom";
 
 
+
 const Sidebar = ({children}) => {
   const [state, setState] = React.useState({
     left: false,
@@ -39,8 +40,6 @@ const Sidebar = ({children}) => {
 
       <List>
 
-        
-       
           <ListItem disablePadding component={Link} to="/">
           <ListItemButton>
               <ListItemIcon>
@@ -70,6 +69,56 @@ const Sidebar = ({children}) => {
           </ListItem>
 
       </List>
+      <Divider/>
+      <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+
+      <List>
+
+        {/* <Link to="/product"> */}
+      <ListItem disablePadding component={Link} to="/product" >
+            <ListItemButton>
+              <ListItemIcon>
+                <CategorySharpIcon/>
+              </ListItemIcon>
+              <ListItemText primary="products" style={{ color:"black" }}/>
+            </ListItemButton>
+          </ListItem>
+        {/* </Link> */}
+       
+          <ListItem disablePadding component={Link} to="/">
+          <ListItemButton>
+              <ListItemIcon>
+                <MonetizationOnRoundedIcon/>
+              </ListItemIcon>
+              <ListItemText primary="payment" />
+        </ListItemButton>
+          </ListItem>
+
+          <ListItem disablePadding component={Link} to="/order">
+            <ListItemButton>
+              <ListItemIcon>
+                <ShoppingCartRoundedIcon/>
+              </ListItemIcon>
+              <ListItemText primary="your orders" style={{ color:"black" }}/>
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <SettingsIcon/>
+              </ListItemIcon>
+              <ListItemText primary="settings" />
+            </ListItemButton>
+          </ListItem>
+
+      </List>
+    </Box>
     </Box>
   );
 

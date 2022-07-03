@@ -10,6 +10,13 @@ import UserSidebar from '../Sidebar/UserSidebar';
 
 const Navbar = () => {
     let isAdmin = false ;
+    let getData =JSON.parse( localStorage.getItem('setData') )
+    let user_data = getData?.user;
+    if(user_data === "admin"){
+        isAdmin = true
+    }else{
+        isAdmin= false
+    }
   return (
     <Container>
         <Toolbar style={{marginBottom:"40px"}}>

@@ -5,6 +5,7 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // import {FormControlLabel} from '@material-ui/core/FormControlLabel';
 const useStyle = makeStyles({
@@ -45,7 +46,14 @@ const Signup = () => {
   const clickHandler = (e) => {
     e.preventDefault()
     console.warn(signupData)
-    navigate("/signin")
+    axios.post("http://localhost:8900/auth/signup",signupData)
+    .then((data)=>{
+      alert("data saved")
+      navigate("/signin")
+    })
+    .catch((err)=>{
+      alert("error")
+    })
   }
   return (
   <Grid className={classes.sonil}>

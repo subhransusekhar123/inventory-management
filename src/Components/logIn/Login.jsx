@@ -3,8 +3,8 @@ import { Avatar, Button, Grid, Paper, TextField, Typography } from '@mui/materia
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // import {FormControlLabel} from '@material-ui/core/FormControlLabel';
-
 const useStyle = makeStyles({
   sonil:{
     display:"flex",
@@ -40,6 +40,14 @@ const Login = () => {
   const clickHandler = (e) => {
     e.preventDefault()
     console.warn(loginData)
+    axios.post("http://localhost:8900/auth/login",loginData)
+    .then((data)=>{
+      localStorage.setItem("setData",JSON.stringify(data.data))
+      alert("success")
+    })
+    .catch((err)=>{
+      alert( "invalid data" )
+    })
   }
   return (
   <Grid className={classes.sonil}>
