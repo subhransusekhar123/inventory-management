@@ -3,12 +3,13 @@ import React from 'react'
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from '../Sidebar/Sidebar';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Profile from '../profile/Profile';
 import UserSidebar from '../Sidebar/UserSidebar';
 
 
 const Navbar = () => {
+    let navigate = useNavigate()
     let isAdmin = false ;
     let getData =JSON.parse( localStorage.getItem('setData') )
     let user_data = getData?.user;
@@ -17,7 +18,13 @@ const Navbar = () => {
     }else{
         isAdmin= false
     }
-  return (
+
+    const logout = () => {
+        localStorage.removeItem("setData");
+        navigate("/signin")
+    }
+
+      return (
     <Container>
         <Toolbar style={{marginBottom:"40px"}}>
             <IconButton color="inherit">
@@ -33,7 +40,10 @@ const Navbar = () => {
                
             </IconButton>
             <Typography variant='h6' style={{flexGrow:1}}></Typography>
-            <Button>Logout</Button>
+            {
+                user_data?<Button onClick={logout}>Logout</Button> : <Button>Login</Button>
+            }
+            
             <IconButton component={Link} to="/profile">
                 <AccountCircleRoundedIcon/>
             </IconButton>

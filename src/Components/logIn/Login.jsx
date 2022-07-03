@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import { makeStyles } from '@mui/styles';
@@ -31,6 +31,12 @@ const Login = () => {
     password:"",
   })
 
+  const [dataGot,setDataGot] = React.useState([])
+
+  useEffect(()=>{
+    
+  },[dataGot])
+
   const changeHandler = (e) => {
     setloginData({
       ...loginData,[e.target.name]:e.target.value
@@ -42,6 +48,7 @@ const Login = () => {
     console.warn(loginData)
     axios.post("http://localhost:8900/auth/login",loginData)
     .then((data)=>{
+      setDataGot(data.data)
       localStorage.setItem("setData",JSON.stringify(data.data))
       alert("success")
     })
