@@ -16,7 +16,9 @@ const useStyle = makeStyles({
 
 const ProductCard = ( { product }) => {
   console.log(product)
-    const [quantityButton,setQuantityButton] = React.useState(0);
+  const [quantityButton,setQuantityButton] = React.useState(0);
+
+  
 
     
     const classes = useStyle()
@@ -49,7 +51,6 @@ const ProductCard = ( { product }) => {
         </Button>
       </CardActions>
            </Card>
-
     </Container>
   );
 }

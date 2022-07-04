@@ -17,8 +17,10 @@ import axios from 'axios';
 
 const TableInventory = ({ update }) => {
 
-  const [data,setData] = React.useState([])
-  const [deleteUpdate,setdeleteUpdate] = React.useState([])
+  const [data,setData] = React.useState([]);
+  const [deleteUpdate,setdeleteUpdate] = React.useState([]);
+  const [localUpdate,setLocalUpdate] = React.useState("");
+  const [afterUpate,setAfterUpdate] = React.useState([])
 
 
     const deleteHandler = (param) => {
@@ -40,12 +42,18 @@ const TableInventory = ({ update }) => {
     }
 
     const editHandler = (param) =>{
-
+      axios.get(`http://localhost:8900/product/find/${param}`)
+      .then((data)=>{
+        localStorage.setItem("editItem",JSON.stringify(data.data))
+        setLocalUpdate(data.data)
+      
+      })
+      .catch((err)=>{console.log(err)})
     }
 
     React.useEffect(() => {
      getDataHandler()
-    }, [update,deleteUpdate])
+    }, [update,deleteUpdate,afterUpate])
 
     
 
@@ -79,8 +87,8 @@ const TableInventory = ({ update }) => {
                 <TableCell align="right">{product.quantity}</TableCell>
                 <TableCell align="right">{product.price}</TableCell>
                 <TableCell align="right">
-                  <IconButton >
-                    <ManualModal>
+                  <IconButton onClick={()=>{editHandler(product._id)}}>
+                    <ManualModal localUpdate = {localUpdate} setAfterUpdate={setAfterUpdate}>
                       <ModeEditOutlineRoundedIcon color='primary'/>
                     </ManualModal>
                   </IconButton>
