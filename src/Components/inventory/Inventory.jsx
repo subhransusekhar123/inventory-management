@@ -12,6 +12,7 @@ const Input = styled('input')({
 });
 
 const Inventory = () => {
+  const [update,setUpdate] = React.useState()
   const [inventoryData, setInventoryData] = React.useState({
     name:"",
     quantity:0,
@@ -47,6 +48,7 @@ const data = new FormData()
     axios.post("http://localhost:8900/product/upload",data,configAxios)
     .then((data)=>{
       alert("data saved")
+      setUpdate(data)
     })
     .catch((err)=>{
       console.log(err)
@@ -71,7 +73,7 @@ const data = new FormData()
       <Button variant='contained' onClick={clickHandler}>add</Button>
       </Stack>
 
-      <TableInventory />
+      <TableInventory update={update}/>
     
     </Container>
   )

@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Button, CardActionArea, CardActions, Container } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -14,22 +14,26 @@ const useStyle = makeStyles({
     }
 })
 
-const ProductCard = () => {
-    const [quantityButton,setQuantityButton] = React.useState(0)
+const ProductCard = ( { product }) => {
+  console.log(product)
+    const [quantityButton,setQuantityButton] = React.useState(0);
+
     
     const classes = useStyle()
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Container>
+
+           <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
+          image={product.image}
+          alt="image"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {product.name}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -44,7 +48,9 @@ const ProductCard = () => {
           add
         </Button>
       </CardActions>
-    </Card>
+           </Card>
+
+    </Container>
   );
 }
 

@@ -10,58 +10,81 @@ import Paper from '@mui/material/Paper';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import ManualModal from '../ManualModal/ManualModal';
+import axios from 'axios';
 
 
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+const TableInventory = ({ update }) => {
 
-const TableInventory = () => {
+  const [data,setData] = React.useState([])
+  const [deleteUpdate,setdeleteUpdate] = React.useState([])
 
-  
+
+    const deleteHandler = (param) => {
+      axios.delete(`http://localhost:8900/product/${param}`).then((data)=>{
+        alert("data deleted")
+        setdeleteUpdate(data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+
+    const getDataHandler = () => {
+      axios.get("http://localhost:8900/product/").then((data)=>{
+        setData(data.data)
+        console.log('datainTAble',data)
+      })
+      .catch((err)=>console.log(err))
+    }
+
+    const editHandler = (param) =>{
+
+    }
+
+    React.useEffect(() => {
+     getDataHandler()
+    }, [update,deleteUpdate])
+
+    
+
   return (
     <Container>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              <TableCell>sl.No</TableCell>
+              <TableCell align="right">image&nbsp;</TableCell>
+              <TableCell align="right">Name</TableCell>
+              <TableCell align="right">quantity&nbsp;</TableCell>
+              <TableCell align="right">price&nbsp;</TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {data.map((product,index) => (
               <TableRow
-                key={row.name}
+                key={index}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {row.name}
+                <TableCell align="right">{index+1}</TableCell>
+                <TableCell align="right">
+                <img src={product.image} alt='image' style={{height:"50px",width:"50px"}}/>
+                  </TableCell>
+                <TableCell component="th" scope="row" align="right">
+                  {product.name}
                 </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+                <TableCell align="right">{product.quantity}</TableCell>
+                <TableCell align="right">{product.price}</TableCell>
                 <TableCell align="right">
                   <IconButton >
                     <ManualModal>
                       <ModeEditOutlineRoundedIcon color='primary'/>
                     </ManualModal>
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={()=>{deleteHandler(product._id)}}>
                     <DeleteRoundedIcon color='warning'/>
                   </IconButton>
                 </TableCell>
