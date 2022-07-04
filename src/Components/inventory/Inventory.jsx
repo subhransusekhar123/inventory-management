@@ -5,6 +5,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import TableInventory from './TableInventory';
+import axios from 'axios';
+
 const Input = styled('input')({
   display: 'none',
 });
@@ -27,9 +29,32 @@ const Inventory = () => {
     setImage(e.target.files[0])
   }
 
+  const configAxios = {
+    headers: {
+        'content-type': 'multipart/form-data',
+    }
+}
+
+const data = new FormData() 
+
   const clickHandler = () => {
+   data.append("name",inventoryData.name);
+   data.append("quantity",inventoryData.quantity);
+   data.append("price",inventoryData.price);
+   data.append("image",image);
+
+
+    axios.post("http://localhost:8900/product/upload",data,configAxios)
+    .then((data)=>{
+      alert("data saved")
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
     console.warn(inventoryData,image.name)
   }
+
+  
   return (
     <Container>
       <Stack direction="row" style={{display:"flex",justifyContent:"space-evenly",marginBottom:'20px'}}>

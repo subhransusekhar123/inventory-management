@@ -41,6 +41,7 @@ const OrderPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* this is the starting point of map  */}
             {rows.map((row) => (
               <TableRow
                 key={row.name}
@@ -65,6 +66,7 @@ const OrderPage = () => {
                 </TableCell>
               </TableRow>
             ))}
+            {/* this is the end point of map */}
           </TableBody>
         </Table>
       </TableContainer>

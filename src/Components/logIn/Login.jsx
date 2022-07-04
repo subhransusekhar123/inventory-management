@@ -49,9 +49,9 @@ const Login = () => {
     if(loginData.email && loginData.password){
       axios.post("http://localhost:8900/auth/login",loginData)
       .then((data)=>{
-        setDataGot(data.data)
         localStorage.setItem("setData",JSON.stringify(data.data))
         alert("success")
+        setDataGot(data.data)
       })
       .catch((err)=>{
         alert( "invalid data" )

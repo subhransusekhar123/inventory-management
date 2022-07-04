@@ -26,6 +26,8 @@ const rows = [
 ];
 
 const TableInventory = () => {
+
+  
   return (
     <Container>
       <TableContainer component={Paper}>
