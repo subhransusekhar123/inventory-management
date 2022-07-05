@@ -38,7 +38,7 @@ const ManualModal = ({children , localUpdate,setAfterUpdate}) => {
   let localEditData = JSON.parse(localStorage.getItem('editItem'))
   console.log(`localEditData._id`,localEditData)
   const getDataFromLocal = () => {
-    setEditChange({name:localEditData.name,quantity:localEditData.quantity,price:localEditData.price})
+    setEditChange({name:localEditData?.name,quantity:localEditData?.quantity,price:localEditData?.price})
   }
 
   const updateHandler = (id) => {
