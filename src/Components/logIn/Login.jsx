@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { Avatar, Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import { makeStyles } from '@mui/styles';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 // import {FormControlLabel} from '@material-ui/core/FormControlLabel';
 const useStyle = makeStyles({
   sonil:{
@@ -21,6 +22,7 @@ const useStyle = makeStyles({
   }
 })
 const Login = () => {
+  const navigate=useNavigate()
   const classes = useStyle()
   const paperStyle={padding:'30x 20px', width:400, margin:"20px auto"}
   const headerStyle={margin:0}
@@ -49,8 +51,15 @@ const Login = () => {
     if(loginData.email && loginData.password){
       axios.post("http://localhost:8900/auth/login",loginData)
       .then((data)=>{
+
         localStorage.setItem("setData",JSON.stringify(data.data))
         alert("success")
+        if(data.data.user==="admin"){
+          navigate("/inventory")
+        }
+        else{
+          navigate("/product")
+        }
         setDataGot(data.data)
       })
       .catch((err)=>{
