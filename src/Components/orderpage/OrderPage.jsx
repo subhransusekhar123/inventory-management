@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import ManualModal from '../ManualModal/ManualModal';
+import axios from 'axios';
 
 
 
@@ -26,6 +27,15 @@ const rows = [
 ];
 
 const OrderPage = () => {
+  const [user_orders,setUser_orders] = React.useState([])
+
+  let user_id = Json.parse(localStorage.getItem())?.id
+
+  const getOrder = () => {
+    axios.get(`http://localhost:8900/order/getSp/${user_id}`)
+    .then((data)=>)
+    .catch((err)=>)
+  }
   return (
     <Container>
       <TableContainer component={Paper}>
