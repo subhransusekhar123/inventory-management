@@ -13,24 +13,21 @@ import ManualModal from '../ManualModal/ManualModal';
 import axios from 'axios';
 
 
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 const OrderPage = () => {
-  const [user_orders,setUser_orders] = React.useState([])
+  const [user_orders,setUser_orders] = React.useState([]);
+  const [delete_update,setDelete_update] = React.useState([])
 
   let user_id = JSON.parse(localStorage.getItem("setData"))?.id
   console.log(user_id,"user_id")
+
+  const deleteHandler = (id) => {
+     axios.delete(`http://localhost:8900/order/deleteData/${id}/${user_id}`)
+     .then((data)=>{
+      alert("deleted")
+      setDelete_update(data.data)
+    })
+     .catch((err)=>console.log(err))
+  }
 
   const getOrder = () => {
     axios.get(`http://localhost:8900/order/getSp/${user_id}`)
@@ -44,7 +41,8 @@ const OrderPage = () => {
 
   React.useEffect(()=>{
     getOrder()
-  },[])
+  },[delete_update])
+
   return (
     <Container>
       <TableContainer component={Paper}>
@@ -52,6 +50,7 @@ const OrderPage = () => {
           <TableHead>
             <TableRow>
               <TableCell algin="right">sl No</TableCell>
+              <TableCell algin="right">image</TableCell>
               <TableCell align="right">product name</TableCell>
               <TableCell align="right">quantity</TableCell>
               <TableCell align="right">price</TableCell>
@@ -68,6 +67,9 @@ const OrderPage = () => {
                 <TableCell component="th" scope="row" align="right">
                   {index + 1}
                 </TableCell>
+                <TableCell align="right">
+                  <img src={orders.image} alt="" srcset="" style={{height:"50px",width:"50px"}} />
+                </TableCell>
                 <TableCell align="right">{orders.name}</TableCell>
                 <TableCell align="right">{orders.quantity}</TableCell>
                 <TableCell align="right">{orders.price}</TableCell>
@@ -77,7 +79,7 @@ const OrderPage = () => {
                       <ModeEditOutlineRoundedIcon color='primary'/>
                     </ManualModal>
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={()=>{deleteHandler(orders._id)}}>
                     <DeleteRoundedIcon color='warning'/>
                   </IconButton>
                 </TableCell>

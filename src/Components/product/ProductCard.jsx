@@ -7,6 +7,7 @@ import { Button, CardActionArea, CardActions, Container } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import axios from 'axios';
 
 const useStyle = makeStyles({
     button_style:{
@@ -18,7 +19,20 @@ const ProductCard = ( { product }) => {
   console.log(product)
   const [quantityButton,setQuantityButton] = React.useState(0);
 
-  
+  let userSId = JSON.parse(localStorage.getItem("setData"))?.id
+
+  let orderData = { 
+    user_id:userSId,
+    name:product.name,
+    image:product.image,
+    price:product.price,
+    quantity:quantityButton
+  }
+  const clickHandler = () => {
+    axios.post("http://localhost:8900/order/postData",orderData)
+    .then((data)=>{alert("data posted")})
+    .catch((err)=>console.log(err))
+  }
 
     
     const classes = useStyle()
@@ -46,7 +60,7 @@ const ProductCard = ( { product }) => {
           <Button onClick={()=>{ setQuantityButton(quantityButton+1) }}><AddIcon/></Button>
         </span>
 
-        <Button size="small" color="primary" className={classes.button_style}>
+        <Button size="small" color="primary" className={classes.button_style} onClick={clickHandler}>
           add
         </Button>
       </CardActions>
