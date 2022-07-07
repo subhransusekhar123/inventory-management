@@ -22,12 +22,10 @@ const style = {
   p: 4,
 };
 
-const ManualModal = ({children , localUpdate,setAfterUpdate}) => {
+const ManualModal = ({children , editUpdate ,setEditUpdate }) => {
   
-  const [editChange,setEditChange] = useState({
-    name:"",
-    quantity:0,
-    price:0
+  const [editChange,setEditChange] = React.useState({
+    quantity:0
   })
 
   
@@ -35,24 +33,25 @@ const ManualModal = ({children , localUpdate,setAfterUpdate}) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  let localEditData = JSON.parse(localStorage.getItem('editItem'))
+  let localEditData = JSON.parse(localStorage.getItem('postEditData'))
   console.log(`localEditData._id`,localEditData)
+
   const getDataFromLocal = () => {
     setEditChange({name:localEditData?.name,quantity:localEditData?.quantity,price:localEditData?.price})
   }
 
   const updateHandler = (id) => {
-    axios.put(`http://localhost:8900/product/${id}`,editChange)
+    axios.put(`http://localhost:8900/order/updateData/${id}`,editChange)
     .then((data)=>{
       alert('data updated')
-      setAfterUpdate(data.data)
+      setEditUpdate(data.data)
     })
     .catch((err)=>{console.log(err)})
   }
 
   React.useEffect(()=>{
     getDataFromLocal()
-  },[localUpdate])
+  },[editUpdate])
 
 
   const handleChange = (e) => {
@@ -75,19 +74,12 @@ const ManualModal = ({children , localUpdate,setAfterUpdate}) => {
       >
         <Fade in={open}>
           <Box sx={style}>
-          <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="component-simple">Name</InputLabel>
-                <Input id="component-simple"  value={editChange.name} onChange={handleChange} name="name"/>
-         </FormControl>
+        
          <FormControl variant='standard' fullWidth>
                 <InputLabel htmlFor="component-simple">quantity</InputLabel>
                 <Input id="component-simple" value={editChange.quantity} onChange={handleChange} name="quantity"/>
          </FormControl>
-         <FormControl variant='standard' fullWidth>
-                <InputLabel htmlFor="component-simple">price</InputLabel>
-                <Input id="component-simple" value={editChange.price} onChange={handleChange} name="price"/>
-         </FormControl>
-        
+       
 
          <FormControl variant='standard' fullWidth>
                 <Button onClick={()=>{ updateHandler(localEditData?._id)}}>update</Button>
