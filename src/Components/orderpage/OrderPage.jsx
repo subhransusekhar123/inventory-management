@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Badge, Container, Divider, IconButton, Toolbar, Typography } from "@mui/material";
+import { Badge, Container, Divider, IconButton, Toolbar, Typography,Button } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -20,6 +20,7 @@ const OrderPage = () => {
   const [total ,setTotal ] = React.useState(0)
 
   let user_id = JSON.parse(localStorage.getItem("setData"))?.id
+  let user_email = JSON.parse(localStorage.getItem("setData"))?.email
   console.log(user_id,"user_id")
 
   const deleteHandler = (id) => {
@@ -45,6 +46,14 @@ const OrderPage = () => {
 const calculate = () => {
   var result = user_orders.reduce(function (acc, obj) { return acc + (obj.quantity * obj.price) }, 0);
   setTotal(result)
+}
+
+
+//send mail
+const sendMail = (mail,message) => {
+  axios.get(`http://localhost:8900/auth/sendEmail/${mail}/${message} `)
+  .then((data)=>{alert('order completed')})
+  .catch((err)=>console.log(err))
 }
 
 //orders data
@@ -114,12 +123,12 @@ const calculate = () => {
               <TableCell/>
               <TableCell align="right">Total</TableCell>
               <TableCell align='right'>{total}</TableCell>
-
-
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Button onClick={()=>{sendMail(user_email,`u have paid ${total}`)}}>pay {total}</Button>
     </Container>
   );
 }
